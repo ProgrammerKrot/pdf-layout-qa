@@ -69,3 +69,4 @@ samples/             # synthetic EN/ES forms
 Outputs: `Result/doc1_annotated.pdf`, `Result/doc2_annotated.pdf`
 
 Do not commit third-party insurance forms.
+With all gratitute toward my friend Tony, whom I was too young to understand
