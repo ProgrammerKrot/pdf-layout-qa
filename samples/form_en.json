@@ -1,0 +1,145 @@
+[
+  {
+    "left": 50,
+    "top": 30,
+    "width": 280,
+    "height": 22,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "Employee Enrollment Form",
+    "type": "Section header"
+  },
+  {
+    "left": 50,
+    "top": 66,
+    "width": 220,
+    "height": 16,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "Section A: Application Type",
+    "type": "Section header"
+  },
+  {
+    "left": 50,
+    "top": 96,
+    "width": 320,
+    "height": 16,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "Select one: New enrollment Open enrollment",
+    "type": "Text"
+  },
+  {
+    "left": 50,
+    "top": 136,
+    "width": 250,
+    "height": 16,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "Section B: Employee Information",
+    "type": "Section header"
+  },
+  {
+    "left": 50,
+    "top": 166,
+    "width": 140,
+    "height": 16,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "Employee name",
+    "type": "Text"
+  },
+  {
+    "left": 50,
+    "top": 196,
+    "width": 140,
+    "height": 16,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "Social security",
+    "type": "Text"
+  },
+  {
+    "left": 50,
+    "top": 226,
+    "width": 140,
+    "height": 16,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "Home address",
+    "type": "Text"
+  },
+  {
+    "left": 50,
+    "top": 256,
+    "width": 180,
+    "height": 16,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "City State ZIP code",
+    "type": "Text"
+  },
+  {
+    "left": 50,
+    "top": 296,
+    "width": 140,
+    "height": 16,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "Employer name",
+    "type": "Text"
+  },
+  {
+    "left": 50,
+    "top": 326,
+    "width": 140,
+    "height": 16,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "Date of hire",
+    "type": "Text"
+  },
+  {
+    "left": 50,
+    "top": 366,
+    "width": 140,
+    "height": 16,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "Type of coverage",
+    "type": "Text"
+  },
+  {
+    "left": 50,
+    "top": 406,
+    "width": 180,
+    "height": 16,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "Primary care physician",
+    "type": "Text"
+  },
+  {
+    "left": 50,
+    "top": 740,
+    "width": 140,
+    "height": 12,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "Page footer 1 of 1",
+    "type": "Page footer"
+  }
+]

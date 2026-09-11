@@ -1,0 +1,70 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 712 >> stream
+BT
+/F1 18 Tf
+1 0 0 1 50 740 Tm
+(Employee Enrollment Form) Tj
+/F1 12 Tf
+1 0 0 1 50 710 Tm
+(Section A: Application Type) Tj
+/F1 11 Tf
+1 0 0 1 50 680 Tm
+(Select one: New enrollment  Open enrollment) Tj
+/F1 12 Tf
+1 0 0 1 50 640 Tm
+(Section B: Employee Information) Tj
+/F1 11 Tf
+1 0 0 1 50 610 Tm
+(Employee name) Tj
+/F1 11 Tf
+1 0 0 1 50 580 Tm
+(Social security) Tj
+/F1 11 Tf
+1 0 0 1 50 550 Tm
+(Home address) Tj
+/F1 11 Tf
+1 0 0 1 50 520 Tm
+(City  State  ZIP code) Tj
+/F1 11 Tf
+1 0 0 1 50 480 Tm
+(Employer name) Tj
+/F1 11 Tf
+1 0 0 1 50 450 Tm
+(Date of hire) Tj
+/F1 11 Tf
+1 0 0 1 50 410 Tm
+(Type of coverage) Tj
+/F1 11 Tf
+1 0 0 1 50 370 Tm
+(Primary care physician) Tj
+/F1 9 Tf
+1 0 0 1 50 40 Tm
+(Page footer 1 of 1) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000001004 00000 n 
+trailer << /Size 6 /Root 1 0 R >>
+startxref
+1074
+%%EOF

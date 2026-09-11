@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.idea/
+.vscode/
+
+TrashBin/
+Result/
+GROOP/
+coordinates/
+SFE/
+SFS/
+processed_pdfs/
+mismatched_ids.txt
+*.session

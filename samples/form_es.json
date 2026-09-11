@@ -1,0 +1,145 @@
+[
+  {
+    "left": 50,
+    "top": 32,
+    "width": 320,
+    "height": 20,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "Formulario de inscripcion del empleado",
+    "type": "Section header"
+  },
+  {
+    "left": 50,
+    "top": 66,
+    "width": 240,
+    "height": 16,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "Seccion A: Tipo de solicitud",
+    "type": "Section header"
+  },
+  {
+    "left": 50,
+    "top": 96,
+    "width": 360,
+    "height": 16,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "Seleccione uno: Nueva inscripcion Inscripcion abierta",
+    "type": "Text"
+  },
+  {
+    "left": 50,
+    "top": 136,
+    "width": 280,
+    "height": 16,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "Seccion B: Informacion del empleado",
+    "type": "Section header"
+  },
+  {
+    "left": 50,
+    "top": 166,
+    "width": 180,
+    "height": 16,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "Nombre del empleado",
+    "type": "Text"
+  },
+  {
+    "left": 50,
+    "top": 196,
+    "width": 140,
+    "height": 16,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "Seguro social",
+    "type": "Text"
+  },
+  {
+    "left": 50,
+    "top": 226,
+    "width": 140,
+    "height": 16,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "Direccion",
+    "type": "Text"
+  },
+  {
+    "left": 50,
+    "top": 256,
+    "width": 220,
+    "height": 16,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "Ciudad Estado Codigo postal",
+    "type": "Text"
+  },
+  {
+    "left": 50,
+    "top": 296,
+    "width": 180,
+    "height": 16,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "Nombre del empleador",
+    "type": "Text"
+  },
+  {
+    "left": 50,
+    "top": 326,
+    "width": 180,
+    "height": 16,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "Fecha de contratacion",
+    "type": "Text"
+  },
+  {
+    "left": 50,
+    "top": 366,
+    "width": 160,
+    "height": 16,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "Tipo de cobertura",
+    "type": "Text"
+  },
+  {
+    "left": 50,
+    "top": 406,
+    "width": 220,
+    "height": 16,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "Medico de atencion primaria",
+    "type": "Text"
+  },
+  {
+    "left": 50,
+    "top": 740,
+    "width": 160,
+    "height": 12,
+    "page_number": 1,
+    "page_width": 612,
+    "page_height": 792,
+    "text": "Pie de pagina 1 de 1",
+    "type": "Page footer"
+  }
+]
