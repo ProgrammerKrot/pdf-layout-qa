@@ -1,4 +1,4 @@
-from layout_sorter import sort_json_notes
+from pdfqa.layout.sorter import sort_json_notes
 from typing import Union, List, Dict
 
 import fitz

@@ -1,5 +1,5 @@
-from config import DIR_CONFIG, PROCESS_CONFIG, MP_CONFIG
-from dots import process_pdf_with_dots, compare_files
+from pdfqa.config import DIR_CONFIG, PROCESS_CONFIG, MP_CONFIG
+from pdfqa.visual.dots import process_pdf_with_dots, compare_files
 
 import multiprocessing
 import shutil

@@ -1,0 +1,17 @@
+services:
+  layout:
+    image: huridocs/pdf-document-layout-analysis:v0.0.21
+    entrypoint: ["./start.sh"]
+    ports:
+      - "5060:5060"
+
+  app:
+    build: .
+    depends_on:
+      - layout
+    environment:
+      LAYOUT_SERVICE_URL: http://layout:5060
+    volumes:
+      - ./samples:/app/samples
+      - ./Result:/app/Result
+    command: python -m pdfqa

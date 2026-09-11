@@ -1,5 +1,5 @@
 from typing import List, Dict, Any
-from custom_constants import *
+from pdfqa.constants import *
 
 import json
 

@@ -1,0 +1,16 @@
+.git
+__pycache__
+*.pyc
+.venv
+venv
+.idea
+.vscode
+Result
+TrashBin
+GROOP
+coordinates
+SFE
+SFS
+processed_pdfs
+mismatched_ids.txt
+*.egg-info

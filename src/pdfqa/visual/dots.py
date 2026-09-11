@@ -1,4 +1,4 @@
-from custom_constants import *
+from pdfqa.constants import *
 from pdf2image import convert_from_path
 from PIL import ImageDraw
 from typing import List, Tuple, Dict

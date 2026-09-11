@@ -1,7 +1,15 @@
-from config import FIELD_MATCHING, PROCESS_CONFIG, MP_CONFIG, MAIN_CONFIG, DIR_CONFIG, COLOR_COMPARISON, FONT_COMPARISON
-from smart_comparison import tiny_tony
-import json
 import copy
+
+from pdfqa.config import (
+    FIELD_MATCHING,
+    PROCESS_CONFIG,
+    MP_CONFIG,
+    MAIN_CONFIG,
+    DIR_CONFIG,
+    COLOR_COMPARISON,
+    FONT_COMPARISON,
+)
+from pdfqa.pipeline import compare_pdfs
 
 _original_configs = {}
 
@@ -117,7 +125,7 @@ def configure_and_run(
         pdf1_to_use = pdf1 if pdf1 is not None else MAIN_CONFIG["default_pdfs"]["pdf1"]
         pdf2_to_use = pdf2 if pdf2 is not None else MAIN_CONFIG["default_pdfs"]["pdf2"]
 
-        tiny_tony(pdf1_to_use, pdf2_to_use)
+        compare_pdfs(pdf1_to_use, pdf2_to_use)
 
     finally:
         if restore_after:
@@ -130,7 +138,7 @@ def run_default():
         restore_configs()
     pdf1 = MAIN_CONFIG["default_pdfs"]["pdf1"]
     pdf2 = MAIN_CONFIG["default_pdfs"]["pdf2"]
-    tiny_tony(pdf1, pdf2)
+    compare_pdfs(pdf1, pdf2)
 
 
 # Example usage:

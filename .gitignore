@@ -5,6 +5,7 @@ venv/
 .env
 .idea/
 .vscode/
+*.egg-info/
 
 TrashBin/
 Result/
@@ -14,4 +15,4 @@ SFE/
 SFS/
 processed_pdfs/
 mismatched_ids.txt
-*.session
+

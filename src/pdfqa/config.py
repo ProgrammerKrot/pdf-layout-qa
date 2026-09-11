@@ -1,5 +1,10 @@
-from custom_constants import output_folder_root, result_folder_root
+import os
+
 from reportlab.lib import colors
+
+from pdfqa.constants import output_folder_root, result_folder_root
+
+LAYOUT_SERVICE_URL = os.getenv("LAYOUT_SERVICE_URL", "http://127.0.0.1:5060")
 
 # ======================= align_tags.py ========================
 

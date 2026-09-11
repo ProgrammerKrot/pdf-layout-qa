@@ -1,16 +1,16 @@
-from align_tags import process_json_files, remove_types_from_json
-from mistakes_shower import draw_squares_on_pdf
-from cutter import crop_and_save
-from config import MAIN_CONFIG
-from custom_constants import *
-from json_sorter import *
+from pdfqa.layout.align import process_json_files, remove_types_from_json
+from pdfqa.visual.annotate import draw_squares_on_pdf
+from pdfqa.visual.cutter import crop_and_save
+from pdfqa.config import LAYOUT_SERVICE_URL, MAIN_CONFIG
+from pdfqa.constants import *
+from pdfqa.layout.json_sorter import *
 
-import isolated_comparison
-import fonts_comparison
-import cleanup_files
-import color_palette
-import font_sized
-import merger
+import pdfqa.visual.lines as isolated_comparison
+import pdfqa.visual.fonts as fonts_comparison
+import pdfqa.util.cleanup as cleanup_files
+import pdfqa.visual.colors as color_palette
+import pdfqa.visual.font_sizes as font_sized
+import pdfqa.layout.merger as merger
 
 import json
 import os
@@ -20,9 +20,19 @@ import subprocess
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
+
+def layout_service_url(port):
+    if "LAYOUT_SERVICE_URL" in os.environ:
+        return os.environ["LAYOUT_SERVICE_URL"].strip()
+    return LAYOUT_SERVICE_URL or f"http://127.0.0.1:{port}"
+
+
 def send_pdf_to_container(pdf_path, port):
     """POST a PDF to the Huridocs layout service. Returns raw JSON text."""
-    command = ["curl", "-X", "POST", "-F", f"file=@{pdf_path}", f"http://localhost:{port}"]
+    url = layout_service_url(port)
+    if not url:
+        raise RuntimeError("layout service disabled")
+    command = ["curl", "-X", "POST", "-F", f"file=@{pdf_path}", url]
     result = subprocess.run(command, capture_output=True, text=True)
     if result.returncode != 0:
         raise RuntimeError(result.stderr.strip() or "layout service request failed")
@@ -36,7 +46,7 @@ def _layout_sidecar(pdf_path):
 
 def extract_layout(pdf_path, json_out, port, fallback_path=None):
     """
-    Prefer the Huridocs container on localhost:{port}.
+    Prefer the Huridocs container.
     If it is down, copy a sidecar JSON next to the PDF, then a configured fallback.
     """
     try:
@@ -56,18 +66,11 @@ def extract_layout(pdf_path, json_out, port, fallback_path=None):
             return
 
     raise FileNotFoundError(
-        f"No layout JSON for {pdf_path}. Start the Huridocs container or add { _layout_sidecar(pdf_path) }."
+        f"No layout JSON for {pdf_path}. Start the Huridocs container or add {_layout_sidecar(pdf_path)}."
     )
 
 
 def update_pdf():
-    """
-    Retrieves updated paths for processed PDFs after visual annotation steps.
-
-    Returns:
-        tuple: Paths to the two processed PDF files.
-    """
-
     return (
         MAIN_CONFIG[output_file_name][processed_pdf_1],
         MAIN_CONFIG[output_file_name][processed_pdf_2],
@@ -75,16 +78,6 @@ def update_pdf():
 
 
 def handle_comparison(pdf_1, pdf_2, numbers, comparison_key: str):
-    """
-    Draws visual comparison annotations on both PDF files based on mismatched page numbers.
-
-    Args:
-        pdf_1 (str): Path to the original first PDF.
-        pdf_2 (str): Path to the original second PDF.
-        numbers (list): List of page numbers with mismatches.
-        comparison_key (str): Key used to extract style and text for highlighting from the config.
-    """
-
     draw_squares_on_pdf(
         MAIN_CONFIG[output_file_name][final_output_1],
         pdf_1,
@@ -104,8 +97,7 @@ def handle_comparison(pdf_1, pdf_2, numbers, comparison_key: str):
     )
 
 
-def main(pdf_1, pdf_2):
-    """Extract layout JSON for both PDFs (container, then local fallbacks)."""
+def extract_both(pdf_1, pdf_2):
     fallbacks = MAIN_CONFIG.get("fallback_layouts", {})
     extract_layout(
         pdf_1,
@@ -118,34 +110,16 @@ def main(pdf_1, pdf_2):
         MAIN_CONFIG[output_file_name][initial_output_2],
         MAIN_CONFIG[container_port],
         fallbacks.get("pdf2"),
-    ))
+    )
 
 
-
-def tiny_tony(pdf_1, pdf_2, line_comparison_check=True, color_comparison_check=True,
-              font_comparison_check=True, font_size_check=True):
-    """
-    Orchestrates the full PDF comparison pipeline: preprocessing, annotation, semantic alignment,
-    and visual mismatch detection across multiple layers.
-
-    Args:
-        pdf_1 (str): Path to the first input PDF.
-        pdf_2 (str): Path to the second input PDF.
-        line_comparison_check (bool): Whether to enable line-level comparison.
-        color_comparison_check (bool): Whether to enable color-based visual comparison.
-        font_comparison_check (bool): Whether to check for font mismatches.
-        font_size_check (bool): Whether to perform font size analysis and annotation.
-
-    Side Effects:
-        - Annotates mismatches on PDF pages.
-        - Writes intermediate and final JSON and PDF files to disk.
-        - Clears temporary directories and removes mismatch tracking files.
-    """
-
+def compare_pdfs(pdf_1, pdf_2, line_comparison_check=True, color_comparison_check=True,
+                 font_comparison_check=True, font_size_check=True):
+    """Run layout extraction, field matching, and visual mismatch annotation."""
     cleanup_files.ensure_clean_folder(output_folder_root)
     cleanup_files.ensure_clean_folder(result_folder_root)
 
-    main(pdf_1, pdf_2)
+    extract_both(pdf_1, pdf_2)
 
     sorted_output_aaa = sort_json_notes(MAIN_CONFIG[output_file_name][initial_output_1])
     sorted_output_aae = sort_json_notes(MAIN_CONFIG[output_file_name][initial_output_2])
@@ -234,8 +208,11 @@ def tiny_tony(pdf_1, pdf_2, line_comparison_check=True, color_comparison_check=T
         print("No files were found.")
 
 
+tiny_tony = compare_pdfs
+
+
 if __name__ == "__main__":
-    tiny_tony(
+    compare_pdfs(
         MAIN_CONFIG[default_pdf][pdf_file_1],
         MAIN_CONFIG[default_pdf][pdf_file_2]
     )

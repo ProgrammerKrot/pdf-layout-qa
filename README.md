@@ -1,64 +1,71 @@
-# PDF layout QA
+# pdf-layout-qa
 
-Compare a source PDF with its translation (or reprint) and mark layout mismatches: field alignment, lines, colors, fonts, font sizes.
+Compare a source PDF with a translation (or reprint) and mark layout mismatches: field alignment, lines, colors, fonts, sizes.
 
-Layout extraction uses the [Huridocs pdf-document-layout-analysis](https://huggingface.co/HURIDOCS/pdf-document-layout-analysis) Docker image when it is running. Without it, the pipeline uses JSON next to the PDF (see `samples/`).
+Layout extraction uses the [Huridocs](https://huggingface.co/HURIDOCS/pdf-document-layout-analysis) Docker image when it is up. Without it, the pipeline uses JSON next to each PDF (`samples/` includes fixtures).
 
-## What it does
+## Run with Docker
 
-1. Extract text blocks (container or sidecar JSON)
-2. Sort/merge blocks and match fields across languages (`sentence-transformers`)
-3. Crop regions and compare lines, colors, fonts, sizes
-4. Write annotated PDFs under `Result/`
+First image build downloads PyTorch — expect several minutes.
 
-Thresholds live in `config.py`. CLI overrides: `RUN.py`.
+```bash
+python samples/generate_samples.py   # if samples/*.pdf are missing
+docker compose up --build
+```
 
-## Setup
+Annotated PDFs land in `Result/` on the host.
 
-Linux: `sudo apt-get install poppler-utils` (needed by `pdf2image`).
+Skip Huridocs and use sidecar JSON only:
+
+```bash
+docker compose run --rm -e LAYOUT_SERVICE_URL= app python -m pdfqa
+```
+
+## Run locally
+
+Linux: `sudo apt-get install poppler-utils`
 
 ```bash
 python -m venv .venv
 # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
+pip install -e .
 python samples/generate_samples.py
+python -m pdfqa
 ```
 
 Optional layout service:
 
 ```bash
-docker run --rm --name pdf-document-layout-analysis -p 5060:5060 --entrypoint ./start.sh huridocs/pdf-document-layout-analysis:v0.0.21
+docker run --rm --name pdf-layout -p 5060:5060 --entrypoint ./start.sh huridocs/pdf-document-layout-analysis:v0.0.21
 ```
 
-## Run
+Override the URL: `LAYOUT_SERVICE_URL=http://127.0.0.1:5060`
 
-```bash
-python smart_comparison.py
-# or
-python RUN.py
-```
-
-Defaults: `samples/form_en.pdf` vs `samples/form_es.pdf`.
+## API
 
 ```python
-from smart_comparison import tiny_tony
-tiny_tony("samples/form_en.pdf", "samples/form_es.pdf")
+from pdfqa.pipeline import compare_pdfs
+from pdfqa.cli import configure_and_run
+
+compare_pdfs("samples/form_en.pdf", "samples/form_es.pdf")
+configure_and_run(pdf1="a.pdf", pdf2="b.pdf", color_threshold=80)
 ```
+
+Thresholds: `src/pdfqa/config.py`
 
 ## Layout
 
 ```
-smart_comparison.py   # pipeline
-RUN.py                # optional config overrides
-align_tags.py         # semantic / geometric field matching
-isolated_comparison.py
-color_palette.py fonts_comparison.py font_sized.py
-samples/              # synthetic EN/ES forms (not real insurer docs)
-config.py
+src/pdfqa/
+  pipeline.py        # orchestrator
+  cli.py             # config overrides
+  layout/            # JSON sort, merge, semantic field match
+  visual/            # lines, colors, fonts, crops, annotations
+  util/
+samples/             # synthetic EN/ES forms
 ```
 
-## Notes
+Outputs: `Result/doc1_annotated.pdf`, `Result/doc2_annotated.pdf`
 
-- This is a research/QA toolkit, not a packaged product.
-- Do not commit third-party insurance forms or filled applications.
-- Annotated outputs: `Result/doc1_annotated.pdf`, `Result/doc2_annotated.pdf`.
+Do not commit third-party insurance forms.

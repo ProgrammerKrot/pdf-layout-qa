@@ -1,13 +1,21 @@
-from config import MODEL_CONFIG, FIELD_MATCHING, FIELD_PATTERNS
 from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
-from custom_constants import *
+
+from pdfqa.config import MODEL_CONFIG, FIELD_MATCHING, FIELD_PATTERNS
+from pdfqa.constants import *
 
 import json
 import os
 from typing import List, Dict, Any
 
-model = SentenceTransformer(MODEL_CONFIG[model_name])
+_model = None
+
+
+def get_model():
+    global _model
+    if _model is None:
+        _model = SentenceTransformer(MODEL_CONFIG[model_name])
+    return _model
 
 
 def get_doc_pattern(pdf_1: str, pdf_2: str) -> int:
@@ -38,7 +46,7 @@ def get_semantic_similarity(text_1: str, text_2: str) -> float:
     if not text_1 or not text_2:
         return default_similarity_score
 
-    embeddings = model.encode([text_1, text_2], convert_to_tensor=True)
+    embeddings = get_model().encode([text_1, text_2], convert_to_tensor=True)
     return cosine_similarity(embeddings[0:1], embeddings[1:2])[0][0]
 
 

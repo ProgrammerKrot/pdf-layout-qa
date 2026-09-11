@@ -1,7 +1,7 @@
 import fitz
 import math
 from typing import List, Tuple
-from custom_constants import color_euclidean_distance_threshold, dot_color_visual_marker
+from pdfqa.constants import color_euclidean_distance_threshold, dot_color_visual_marker
 
 
 def int_to_rgb(color: int) -> Tuple[int, int, int]:
@@ -133,7 +133,7 @@ def main() -> None:
     saves mismatched colors to file and marks them visually in a new PDF.
     """
 
-    from config import MAIN_CONFIG, COLOR_COMPARISON
+    from pdfqa.config import MAIN_CONFIG, COLOR_COMPARISON
 
     pdf_1 = MAIN_CONFIG["default_pdfs"]["pdf1"]
     pdf_2 = MAIN_CONFIG["default_pdfs"]["pdf2"]

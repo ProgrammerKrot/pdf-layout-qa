@@ -7,9 +7,10 @@ from reportlab.lib import colors
 from PyPDF2 import PdfReader, PdfWriter
 from typing import Tuple, Dict, List
 from collections import defaultdict
-from config import FONT_COMPARISON
 from datetime import datetime
-from custom_constants import *
+
+from pdfqa.config import FONT_COMPARISON
+from pdfqa.constants import *
 
 import fitz
 import os
